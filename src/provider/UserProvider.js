@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export const UserContext = React.createContext(null);
+export const UserContext = React.createContext({ user: null });
 class UserProvider extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +10,7 @@ class UserProvider extends Component {
 
   render() {
     return (
-      <UserContext.Provider value={this.state.user}>
+      <UserContext.Provider value={{ user: this.state.user }}>
         {this.props.children}
       </UserContext.Provider>
     );
