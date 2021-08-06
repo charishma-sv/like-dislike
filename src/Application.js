@@ -10,12 +10,19 @@ function Application() {
   const { user } = useContext(UserContext);
   return (
     <BrowserRouter>
-      <Route exact path="/">
+      {user ? (
+        <Route exact path="/">
+          <Random />
+        </Route>
+      ) : (
+        <Route path=""> </Route>
+      )}
+      {/* <Route exact path="/">
         {user ? <Random /> : <Home />}
       </Route>
       <Route path="/login">{user ? <Random /> : <Login />}</Route>
       <Route path="/signup">{user ? <Random /> : <SignUp />}</Route>
-      <Route path="/random">{user ? <Random /> : <Home />}</Route>
+      <Route path="/random">{user ? <Random /> : <Home />}</Route> */}
     </BrowserRouter>
   );
 }

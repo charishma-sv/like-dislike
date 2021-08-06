@@ -5,7 +5,7 @@ class UserProvider extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { user: 'new user' };
+    this.state = { user: undefined };
   }
 
   render() {
