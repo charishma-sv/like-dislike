@@ -5,12 +5,17 @@ import Random from './components/Random';
 import Home from './components/Home';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
-
+import ProtectedRoute from './routes/ProtectedRoute';
 function Application() {
   const { user } = useContext(UserContext);
+  console.log(user);
   return (
     <BrowserRouter>
-      <Route exact path="/">
+      <Route exact path="/" component={Home} />
+      <Route path="/login" component={Login} />
+      <Route path="/signup" component={SignUp} />
+      <ProtectedRoute path="/random" user={user} component={Random} />
+      {/* <Route exact path="/">
         <Home />
       </Route>
       <Route path="/login">
@@ -23,13 +28,7 @@ function Application() {
         <Route path="/random">
           <Random />
         </Route>
-      )}
-      {/* <Route exact path="/">
-        {user ? <Random /> : <Home />}
-      </Route>
-      <Route path="/login">{user ? <Random /> : <Login />}</Route>
-      <Route path="/signup">{user ? <Random /> : <SignUp />}</Route>
-      <Route path="/random">{user ? <Random /> : <Home />}</Route> */}
+      )} */}
     </BrowserRouter>
   );
 }
