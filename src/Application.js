@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import { UserContext } from './provider/UserProvider';
 import Random from './components/Random';
 import Home from './components/Home';
@@ -10,12 +10,19 @@ function Application() {
   const { user } = useContext(UserContext);
   return (
     <BrowserRouter>
-      {user ? (
-        <Route exact path="/">
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route path="/login">
+        <Login></Login>
+      </Route>
+      <Route path="/signup">
+        <SignUp />
+      </Route>
+      {user && (
+        <Route path="/random">
           <Random />
         </Route>
-      ) : (
-        <Route path=""> </Route>
       )}
       {/* <Route exact path="/">
         {user ? <Random /> : <Home />}
