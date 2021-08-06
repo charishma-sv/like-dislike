@@ -1,7 +1,13 @@
 import './App.css';
+import Application from './Application';
+import UserProvider from './provider/UserProvider';
 import './scss/main.scss';
 function App() {
-  return <div className="App">Like/Dislike</div>;
+  return (
+    <UserProvider>
+      <Application></Application>
+    </UserProvider>
+  );
 }
 
 export default App;
