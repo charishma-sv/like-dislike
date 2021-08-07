@@ -7,15 +7,12 @@ function Random() {
   return (
     <Container fluid className="p-0 vh-100 text-center random-bg">
       <Container fluid className="random-img p-0">
-        <img src={pic} alt="" className="w-100" />
+        <img src={pic} alt="" className="h-100 mt-4" />
       </Container>
-      <Container>
-        <a href="#">
-          <img src={like} alt="like" className="random-btn" />
-        </a>
-        <a href="#">
-          <img src={dislike} alt="like" className="random-btn" />
-        </a>
+      <Container className="mt-4">
+        <img src={like} alt="like" className="btn random-btn" />
+
+        <img src={dislike} alt="like" className=" btn random-btn" />
       </Container>
     </Container>
   );
