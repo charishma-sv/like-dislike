@@ -22,7 +22,11 @@ $random-bg-img: url('../images/photo-1533628635777-112b2239b1c7.jpeg');
   background-repeat: no-repeat;
   background-image: $random-bg-img;
   background-attachment: fixed;
-
+  .random {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
   .random-img {
     overflow: hidden;
     height: 60vh;
