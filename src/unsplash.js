@@ -7,8 +7,8 @@ const unsplash = createApi({
 export const randomPic = async () => {
   console.log('inside unsplash random js');
   let pic;
-  await unsplash.photos.getRandom({}).then((photo) => {
-    pic = photo;
+  await unsplash.photos.getRandom({}).then((res) => {
+    pic = res.response.urls.regular;
   });
   return pic;
 };
