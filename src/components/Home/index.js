@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import like from '../../images/like_and_dislike.png';
 function Home() {
   return (
@@ -9,12 +10,16 @@ function Home() {
         <img alt="" src={like} className="image pt-4" />
       </Container>
       <Container className="btn-container mb-4">
-        <Button className="mr-2" variant="dark" size="lg">
-          Login
-        </Button>
-        <Button className="mr-2" variant="dark " size="lg">
-          Signup
-        </Button>
+        <Link to="/login">
+          <Button className="mr-2" variant="dark" size="lg">
+            Login
+          </Button>
+        </Link>
+        <Link to="/signup">
+          <Button className="mr-2" variant="dark " size="lg">
+            Signup
+          </Button>
+        </Link>
       </Container>
     </Container>
   );
