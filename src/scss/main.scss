@@ -1,8 +1,9 @@
-$bg-img: url('../images/photo-1530543787849-128d94430c6b.jpeg');
+$home-bg-img: url('../images/photo-1530543787849-128d94430c6b.jpeg');
+$random-bg-img: url('../images/photo-1533628635777-112b2239b1c7.jpeg');
 .home-bg {
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: $bg-img;
+  background-image: $home-bg-img;
   background-attachment: fixed;
 }
 .header {
@@ -10,5 +11,11 @@ $bg-img: url('../images/photo-1530543787849-128d94430c6b.jpeg');
 }
 .btn-container {
   margin-top: 50px;
+}
+.random-bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: $random-bg-img;
+  background-attachment: fixed;
 }
 @import '~bootstrap/scss/bootstrap';
