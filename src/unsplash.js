@@ -1,5 +1,4 @@
 import { createApi } from 'unsplash-js';
-
 const unsplash = createApi({
   accessKey: 'mYj9awBmDjuLzvC_Xa--o75rGZdsvi1EIWIRB3mxHxo',
 });
