@@ -9,27 +9,12 @@ import ProtectedRoute from './routes/ProtectedRoute';
 import PublicRoute from './routes/PublicRoute';
 function Application() {
   const { user } = useContext(UserContext);
-  console.log(user);
   return (
     <BrowserRouter>
-      <PublicRoute exact path="/" user={user} componen={Home} />
-      <PublicRoute path="/login" user={user} componen={Login} />
-      <PublicRoute path="/signup" user={user} componen={SignUp} />
+      <PublicRoute exact path="/" user={user} component={Home} />
+      <PublicRoute path="/login" user={user} component={Login} />
+      <PublicRoute path="/signup" user={user} component={SignUp} />
       <ProtectedRoute path="/random" user={user} component={Random} />
-      {/* <Route exact path="/">
-        <Home />
-      </Route>
-      <Route path="/login">
-        <Login></Login>
-      </Route>
-      <Route path="/signup">
-        <SignUp />
-      </Route>
-      {user && (
-        <Route path="/random">
-          <Random />
-        </Route>
-      )} */}
     </BrowserRouter>
   );
 }
