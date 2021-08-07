@@ -6,15 +6,15 @@ import dislike from '../../images/like-thumb-black-product.png';
 function Random() {
   return (
     <Container fluid className="p-0 vh-100 text-center random-bg">
-      <Container>
-        <img src={pic} alt="" className="w-50 h-25" />
+      <Container fluid className="random-img p-0">
+        <img src={pic} alt="" className="w-100" />
       </Container>
       <Container>
         <a href="#">
-          <img src={like} alt="like" />
+          <img src={like} alt="like" className="random-btn" />
         </a>
         <a href="#">
-          <img src={dislike} alt="like" />
+          <img src={dislike} alt="like" className="random-btn" />
         </a>
       </Container>
     </Container>

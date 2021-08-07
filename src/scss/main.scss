@@ -17,5 +17,13 @@ $random-bg-img: url('../images/photo-1533628635777-112b2239b1c7.jpeg');
   background-repeat: no-repeat;
   background-image: $random-bg-img;
   background-attachment: fixed;
+  .random-img {
+    width: 100%;
+    height: 60vh;
+  }
+  .random-btn {
+    width: 15vh;
+    height: 15vh;
+  }
 }
 @import '~bootstrap/scss/bootstrap';
