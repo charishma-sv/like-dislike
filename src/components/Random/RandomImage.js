@@ -7,11 +7,13 @@ import { randomPic } from '../../unsplash';
 function RandomImage() {
   const [picture, setPicture] = React.useState(pic);
   const [likeCount, setLikeCount] = React.useState(0);
+  const [picId, setPicId] = React.useState('');
 
   const getRandomPic = async () => {
-    const photo = await randomPic();
+    const { photo, id } = await randomPic();
     setPicture(photo);
-    console.log('photo', photo);
+    setPicId(id);
+    console.log('photoId', id);
   };
 
   React.useEffect(() => {
@@ -19,13 +21,11 @@ function RandomImage() {
   }, []);
 
   const handleLike = () => {
-    console.log('you hit like');
     getRandomPic();
     setLikeCount(likeCount + 1);
   };
 
   const handleDisLike = () => {
-    console.log('you hit dislike');
     getRandomPic();
   };
   console.log('liked count', likeCount);

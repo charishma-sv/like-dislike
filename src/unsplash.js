@@ -5,9 +5,12 @@ const unsplash = createApi({
 
 export const randomPic = async () => {
   console.log('inside unsplash random js');
-  let pic;
+  let photo;
+  let id;
   await unsplash.photos.getRandom({}).then((res) => {
-    pic = res.response.urls.regular;
+    console.log('response', res);
+    id = res.response.id;
+    photo = res.response.urls.regular;
   });
-  return pic;
+  return { photo, id };
 };
