@@ -1,1 +1,10 @@
+$bg-img: url('../images/photo-1530543787849-128d94430c6b.jpeg');
+.home-bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: $bg-img;
+}
+.header {
+  color: #9f8189;
+}
 @import '~bootstrap/scss/bootstrap';
