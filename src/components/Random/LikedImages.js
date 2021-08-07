@@ -3,7 +3,7 @@ import { Button, Card, Container } from 'react-bootstrap';
 
 function LikedImages() {
   return (
-    <Container className="liked d-none">
+    <Container>
       <Container className="d-flex justify-content-center">
         <Card style={{ width: '18rem', margin: '15px' }}>
           <Card.Img variant="top" src="holder.js/100px180" />
