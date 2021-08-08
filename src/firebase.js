@@ -18,7 +18,6 @@ export const firestore = firebase.firestore();
 
 //create a user
 export const createUser = async (name, email, password) => {
-  console.log('inside create user');
   try {
     const { user } = await auth.createUserWithEmailAndPassword(email, password);
     generateUserDocument(user, name);
@@ -42,8 +41,23 @@ export const generateUserDocument = async (user, name) => {
     console.log('error', error);
     throw error;
   }
-  console.log('userref', userRef);
-  console.log(user.uid, name);
+};
+
+//get user document from firestore
+export const getUserDocument = async (user) => {
+  if (!user) return;
+  try {
+    const { id } = user;
+    console.log('id of user in get user doc', id);
+    const userDoc = await firestore.doc(`users/${id}`).get();
+    return {
+      id,
+      ...userDoc.data(),
+    };
+  } catch (error) {
+    console.log('error fetching data', error);
+    throw error;
+  }
 };
 
 //loggin in user

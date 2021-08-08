@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { BrowserRouter, Redirect, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { UserContext } from './provider/UserProvider';
 import Random from './components/Random';
 import Home from './components/Home';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import FloatingLabel from 'react-bootstrap-floating-label';
-import { auth, login } from '../../firebase';
+import { login } from '../../firebase';
 
 function Login() {
   const [email, setEmail] = React.useState('');
