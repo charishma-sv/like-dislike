@@ -15,7 +15,12 @@ firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
 //create a user
-export const createUser = (name, email, password) => {
+export const createUser = async (name, email, password) => {
   console.log('inside create user');
-  auth.createUserWithEmailAndPassword(email, password);
+  try {
+    await auth.createUserWithEmailAndPassword(email, password);
+  } catch (error) {
+    console.log('error', error);
+    throw error;
+  }
 };

@@ -7,6 +7,7 @@ function SignUp() {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [error, setError] = React.useState('');
   const onChangeHandler = (event) => {
     const { id, value } = event.target;
     if (id === 'name-input') {
@@ -17,14 +18,19 @@ function SignUp() {
       setPassword(value);
     }
   };
-  const signUpUser = (event, name, email, password) => {
+  const signUpUser = async (event, name, email, password) => {
     console.log('inside signup user');
     event.preventDefault();
-    createUser(name, email, password);
+    try {
+      await createUser(name, email, password);
+    } catch (error) {
+      setError(error);
+    }
   };
   return (
     <Container className="mw-100 vh-100 d-flex align-items-center">
       <Container className="w-50 h-75">
+        {error && <p>{`${error}`}</p>}
         <Form className="">
           <Form.Group className="mb-3">
             <FloatingLabel
