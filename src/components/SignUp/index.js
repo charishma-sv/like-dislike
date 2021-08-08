@@ -7,12 +7,13 @@ function SignUp() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const onChangeHandler = (event) => {
-    console.log('inside change event');
+    console.log('inside change event', event);
     const { name, value } = event.target;
     if (name === 'userName') {
       console.log('inside user name');
       setName(value);
     } else if (name === 'userEmail') {
+      console.log('inside user email');
       setEmail(value);
     } else if (name === 'userPassword') {
       setPassword(value);
@@ -24,18 +25,15 @@ function SignUp() {
       <Container className="w-50 h-75">
         <Form className="">
           <Form.Group className="mb-3">
-            <div className="form-group">
-              <div className="floating-label">
-                <label htmlFor="name">Floating label</label>
-                <input
-                  className="form-control"
-                  name="userName"
-                  type="text"
-                  value={name}
-                  onChange={(event) => onChangeHandler(event)}
-                />
-              </div>
-            </div>
+            <FloatingLabel label="Name" className="mb-3">
+              <Form.Control
+                type="text"
+                name="userName"
+                value={name}
+                placeholder="name@example.com"
+                onChange={(event) => onChangeHandler(event)}
+              />
+            </FloatingLabel>
           </Form.Group>
           <Form.Group className="mb-3">
             <FloatingLabel
