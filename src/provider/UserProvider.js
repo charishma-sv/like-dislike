@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { auth } from '../firebase';
 
 export const UserContext = React.createContext({ user: null });
 class UserProvider extends Component {
@@ -7,7 +8,11 @@ class UserProvider extends Component {
 
     this.state = { user: undefined };
   }
-
+  componentDidMount = async () => {
+    auth.onAuthStateChanged((user) => {
+      console.log('user state changed', user);
+    });
+  };
   render() {
     return (
       <UserContext.Provider value={{ user: this.state.user }}>
