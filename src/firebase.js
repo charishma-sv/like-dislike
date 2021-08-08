@@ -12,3 +12,10 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+export const auth = firebase.auth();
+//create a user
+export const createUser = (name, email, password) => {
+  console.log('inside create user');
+  auth.createUserWithEmailAndPassword(email, password);
+};

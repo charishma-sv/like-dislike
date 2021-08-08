@@ -1,25 +1,26 @@
 import React from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import FloatingLabel from 'react-bootstrap-floating-label';
+import { createUser } from '../../firebase';
 
 function SignUp() {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  console.log('email, name,password', email, name, password);
   const onChangeHandler = (event) => {
-    console.log('inside change event', event);
-    const { id, name, value } = event.target;
-    console.log('id,', id);
+    const { id, value } = event.target;
     if (id === 'name-input') {
-      console.log('inside user name');
       setName(value);
     } else if (id === 'email-input') {
-      console.log('inside user email');
       setEmail(value);
     } else if (id === 'password-input') {
       setPassword(value);
     }
+  };
+  const signUpUser = (event, name, email, password) => {
+    console.log('inside signup user');
+    event.preventDefault();
+    createUser(name, email, password);
   };
   return (
     <Container className="mw-100 vh-100 d-flex align-items-center">
@@ -30,7 +31,6 @@ function SignUp() {
               label="Name"
               className="mb-3"
               id="name"
-              name="userName"
               onChange={(event) => onChangeHandler(event)}
               value={name}
             >
@@ -42,7 +42,6 @@ function SignUp() {
               label="Email address"
               className="mb-3"
               id="email"
-              name="userEmail"
               value={email}
               onChange={(event) => onChangeHandler(event)}
             >
@@ -58,16 +57,20 @@ function SignUp() {
               label="password"
               className="mb-3"
               id="password"
-              name="userPassword"
               value={password}
               onChange={(event) => onChangeHandler(event)}
+              type="password"
             >
-              <Form.Control type="password" placeholder="name@example.com" />
+              <Form.Control placeholder="name@example.com" />
             </FloatingLabel>
           </Form.Group>
 
-          <Button variant="primary" type="submit">
-            Submit
+          <Button
+            variant="primary"
+            type="submit"
+            onClick={(event) => signUpUser(event, name, email, password)}
+          >
+            Signup
           </Button>
         </Form>
       </Container>
