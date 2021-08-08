@@ -20,7 +20,7 @@ export const firestore = firebase.firestore();
 export const createUser = async (name, email, password) => {
   console.log('inside create user');
   try {
-    const user = await auth.createUserWithEmailAndPassword(email, password);
+    const { user } = await auth.createUserWithEmailAndPassword(email, password);
     generateUserDocument(user, name);
   } catch (error) {
     console.log('error', error);
@@ -30,5 +30,17 @@ export const createUser = async (name, email, password) => {
 
 //creating a user document in firestore
 export const generateUserDocument = async (user, name) => {
-  console.log(user, name);
+  if (!user) return;
+  const userRef = firestore.doc(`users/${user.uid}`);
+  try {
+    await userRef.set({
+      user,
+      name,
+    });
+  } catch (error) {
+    console.log('error', error);
+    throw error;
+  }
+  console.log('userref', userRef);
+  console.log(user.uid, name);
 };
