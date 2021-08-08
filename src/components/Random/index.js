@@ -22,11 +22,11 @@ function Random() {
           <LikedImages />
         </Tab>
       </Tabs>
-      <Container>
+      <Container className="d-flex justify-content-center fixed-bottom">
         <Button
           variant="primary"
           type="submit"
-          className="fixed-bottom"
+          className=""
           onClick={(event) => logout()}
         >
           Logout

@@ -80,3 +80,6 @@ export const logout = async () => {
     throw error;
   }
 };
+
+//create liked picture ids document in firebase
+export const generateLikedDocument = async (picId) => {};
