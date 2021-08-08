@@ -18,30 +18,34 @@ function SignUp() {
       setPassword(value);
     }
   };
-  console.log('email', email);
+  console.log('email, name', email, name);
   return (
     <Container className="mw-100 vh-100 d-flex align-items-center">
       <Container className="w-50 h-75">
         <Form className="">
           <Form.Group className="mb-3">
-            <FloatingLabel label="Name" className="mb-3"></FloatingLabel>
-            <Form.Control
-              type="text"
-              placeholder="ABCDEF"
-              name="userName"
-              value={name}
-              onChange={(event) => onChangeHandler()}
-            />
+            <div className="form-group">
+              <div className="floating-label">
+                <label htmlFor="name">Floating label</label>
+                <input
+                  className="form-control"
+                  name="userName"
+                  type="text"
+                  value={name}
+                  onChange={(event) => onChangeHandler(event)}
+                />
+              </div>
+            </div>
           </Form.Group>
           <Form.Group className="mb-3">
-            <FloatingLabel label="Email address" className="mb-3">
-              <Form.Control
-                type="email"
-                placeholder="name@example.com"
-                name="userEmail"
-                value={email}
-                onChange={(event) => onChangeHandler()}
-              />
+            <FloatingLabel
+              label="Email address"
+              className="mb-3"
+              name="userEmail"
+              value={email}
+              onChange={(event) => onChangeHandler(event)}
+            >
+              <Form.Control type="email" placeholder="name@example.com" />
             </FloatingLabel>
             <Form.Text className="text-muted d-none">
               Enter valid email
