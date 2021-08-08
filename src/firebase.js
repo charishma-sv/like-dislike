@@ -47,11 +47,12 @@ export const generateUserDocument = async (user, name) => {
 export const getUserDocument = async (user) => {
   if (!user) return;
   try {
-    const { id } = user;
-    console.log('id of user in get user doc', id);
-    const userDoc = await firestore.doc(`users/${id}`).get();
+    const { uid } = user;
+    console.log('id of user in get user doc', uid);
+    const userDoc = await firestore.doc(`users/${uid}`).get();
+    console.log('user doc data', userDoc.data());
     return {
-      id,
+      uid,
       ...userDoc.data(),
     };
   } catch (error) {
@@ -60,12 +61,22 @@ export const getUserDocument = async (user) => {
   }
 };
 
-//loggin in user
+//logging in user
 export const login = async (email, password) => {
   try {
     await auth.signInWithEmailAndPassword(email, password);
   } catch (error) {
     console.log('error signin ', error);
+    throw error;
+  }
+};
+
+//logout user
+export const logout = async () => {
+  try {
+    await auth.signOut();
+  } catch (error) {
+    console.log('error signing out', error);
     throw error;
   }
 };

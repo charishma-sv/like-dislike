@@ -13,10 +13,12 @@ class UserProvider extends Component {
       console.log('user state changed', userAuth);
       const user = await getUserDocument(userAuth);
       console.log('user after state change', user);
-      this.setState(user);
+      this.setState({ user });
     });
   };
+
   render() {
+    console.log('provider this.state.user', this.state.user);
     return (
       <UserContext.Provider value={{ user: this.state.user }}>
         {this.props.children}

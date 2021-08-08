@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, Tab, Tabs } from 'react-bootstrap';
+import { Button, Container, Tab, Tabs } from 'react-bootstrap';
+import { logout } from '../../firebase';
 import LikedImages from './LikedImages';
 import RandomImage from './RandomImage';
 
@@ -21,6 +22,16 @@ function Random() {
           <LikedImages />
         </Tab>
       </Tabs>
+      <Container>
+        <Button
+          variant="primary"
+          type="submit"
+          className="fixed-bottom"
+          onClick={(event) => logout()}
+        >
+          Logout
+        </Button>
+      </Container>
     </Container>
   );
 }
