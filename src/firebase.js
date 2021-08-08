@@ -32,9 +32,10 @@ export const createUser = async (name, email, password) => {
 export const generateUserDocument = async (user, name) => {
   if (!user) return;
   const userRef = firestore.doc(`users/${user.uid}`);
+  const { email } = user;
   try {
     await userRef.set({
-      user,
+      email,
       name,
     });
   } catch (error) {
@@ -43,4 +44,14 @@ export const generateUserDocument = async (user, name) => {
   }
   console.log('userref', userRef);
   console.log(user.uid, name);
+};
+
+//loggin in user
+export const login = async (email, password) => {
+  try {
+    await auth.signInWithEmailAndPassword(email, password);
+  } catch (error) {
+    console.log('error signin ', error);
+    throw error;
+  }
 };
