@@ -14,13 +14,21 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
+export const firestore = firebase.firestore();
+
 //create a user
 export const createUser = async (name, email, password) => {
   console.log('inside create user');
   try {
-    await auth.createUserWithEmailAndPassword(email, password);
+    const user = await auth.createUserWithEmailAndPassword(email, password);
+    generateUserDocument(user, name);
   } catch (error) {
     console.log('error', error);
     throw error;
   }
+};
+
+//creating a user document in firestore
+export const generateUserDocument = async (user, name) => {
+  console.log(user, name);
 };
