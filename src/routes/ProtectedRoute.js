@@ -8,7 +8,7 @@ class ProtectedRoute extends Component {
       <Route
         {...props}
         render={(props) =>
-          user ? <Component {...props} /> : <Redirect to="/" />
+          user ? <Component {...props} user={user} /> : <Redirect to="/" />
         }
       />
     );

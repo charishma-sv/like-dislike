@@ -5,7 +5,8 @@ import dislike from '../../images/black-thumb-dislike-product.png';
 import like from '../../images/like-thumb-black-product.png';
 import { randomPic } from '../../unsplash';
 import { generateLikedDocument } from '../../firebase';
-function RandomImage() {
+function RandomImage(props) {
+  const { user } = props;
   const [picture, setPicture] = React.useState(pic);
   const [likeCount, setLikeCount] = React.useState(0);
   const [picId, setPicId] = React.useState('');
@@ -25,7 +26,7 @@ function RandomImage() {
   const handleLike = () => {
     getRandomPic();
     setLikeCount(likeCount + 1);
-    generateLikedDocument(picId);
+    generateLikedDocument(user, picId);
   };
 
   const handleDisLike = () => {

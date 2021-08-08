@@ -82,4 +82,17 @@ export const logout = async () => {
 };
 
 //create liked picture ids document in firebase
-export const generateLikedDocument = async (picId) => {};
+export const generateLikedDocument = async (user, picId) => {
+  if (!picId) return;
+  const likedRef = firestore.collection('liked').doc();
+  const liked = {
+    user,
+    likes: picId,
+  };
+  try {
+    likedRef.set(liked);
+  } catch (error) {
+    console.log('error generating liked doc', error);
+    throw error;
+  }
+};

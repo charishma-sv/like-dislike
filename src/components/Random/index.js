@@ -4,9 +4,10 @@ import { logout } from '../../firebase';
 import LikedImages from './LikedImages';
 import RandomImage from './RandomImage';
 
-function Random() {
+function Random(props) {
   const [toggle, updateToggle] = React.useState('randomImage');
-
+  const { user } = props;
+  console.log('user from props in random', user);
   return (
     <Container fluid className="p-0 vh-100 text-center random-bg">
       <Tabs
@@ -16,7 +17,7 @@ function Random() {
         className="mb-3"
       >
         <Tab eventKey="randomImage" title="Home">
-          <RandomImage />
+          <RandomImage user={user} />
         </Tab>
         <Tab eventKey="liked" title="Profile">
           <LikedImages />
