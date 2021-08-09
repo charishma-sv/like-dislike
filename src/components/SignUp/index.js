@@ -19,7 +19,6 @@ function SignUp() {
     }
   };
   const signUpUser = async (event, name, email, password) => {
-    console.log('inside signup user');
     event.preventDefault();
     try {
       await createUser(name, email, password);

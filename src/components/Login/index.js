@@ -17,15 +17,12 @@ function Login() {
   };
 
   const loginUser = async (event, email, password) => {
-    console.log('inside login user');
     event.preventDefault();
     try {
       await login(email, password);
     } catch (error) {
       setError(error);
     }
-
-    console.log('signed in');
   };
   return (
     <Container className="mw-100 vh-100 d-flex align-items-center">

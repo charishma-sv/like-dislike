@@ -85,12 +85,14 @@ export const logout = async () => {
 export const generateLikedDocument = async (user, picId) => {
   if (!picId) return;
   const likedRef = firestore.collection('liked').doc();
+  const imagesArr = [];
+  imagesArr.push(picId);
   const liked = {
     user,
-    likes: picId,
+    likes: imagesArr,
   };
   try {
-    likedRef.set(liked);
+    await likedRef.set(liked);
   } catch (error) {
     console.log('error generating liked doc', error);
     throw error;
