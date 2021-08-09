@@ -1,21 +1,17 @@
 import React from 'react';
 import { Button, Container, Tab, Tabs } from 'react-bootstrap';
-import { getUserDocument, logout } from '../../firebase';
+import { logout } from '../../firebase';
 import LikedImages from './LikedImages';
 import RandomImage from './RandomImage';
+import { getPhotos } from '../../unsplash';
 
 function Random(props) {
   const [toggle, updateToggle] = React.useState('randomImage');
   const { user } = props;
-  const [likedArr, setLikedArr] = React.useState([]);
-
-  const getLikedList = async (user) => {
-    const userData = await getUserDocument(user);
-    console.log('user data in random', userData);
-  };
   React.useEffect(() => {
-    getLikedList(user);
-  });
+    getPhotos(user.picArr);
+  }, []);
+
   console.log('user from props in random', user);
   return (
     <Container fluid className="p-0 vh-100 text-center random-bg">
@@ -29,7 +25,7 @@ function Random(props) {
           <RandomImage user={user} />
         </Tab>
         <Tab eventKey="liked" title="Profile">
-          <LikedImages likedArr={likedArr} />
+          <LikedImages user={user} />
         </Tab>
       </Tabs>
       <Container className="d-flex justify-content-center fixed-bottom">

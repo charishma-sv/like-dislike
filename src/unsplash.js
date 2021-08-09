@@ -12,3 +12,7 @@ export const randomPic = async () => {
   });
   return { photo, id };
 };
+
+export const getPhotos = async (picArr) => {
+  console.log('inside get phots unsplash');
+};
