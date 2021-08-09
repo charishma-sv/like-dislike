@@ -15,7 +15,6 @@ function RandomImage(props) {
     const { photo, id } = await randomPic();
     setPicture(photo);
     setPicId(id);
-    console.log('photoId', id);
   };
 
   React.useEffect(() => {
@@ -31,7 +30,6 @@ function RandomImage(props) {
   const handleDisLike = () => {
     getRandomPic();
   };
-  console.log('liked count', likeCount);
   return (
     <Container>
       <Container fluid className="random-img p-0">

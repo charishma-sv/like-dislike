@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Redirect } from 'react-router-dom';
+import LoadingComponent from '../components/LoadingComponent';
 class PublicRoute extends Component {
   render() {
     const { component: Component, user, ...props } = this.props;
@@ -8,7 +9,13 @@ class PublicRoute extends Component {
       <Route
         {...props}
         render={() =>
-          user ? <Redirect to="/random"></Redirect> : <Component />
+          user === null ? (
+            <LoadingComponent />
+          ) : user ? (
+            <Redirect to="/random"></Redirect>
+          ) : (
+            <Component />
+          )
         }
       />
     );

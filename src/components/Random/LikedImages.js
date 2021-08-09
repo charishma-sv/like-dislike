@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 function LikedImages(props) {
   const { photoArr } = props;
-  console.log('pic arr in liked', photoArr);
   return (
     <Container>
       <Container className="d-flex flex-wrap justify-content-center random-bg">

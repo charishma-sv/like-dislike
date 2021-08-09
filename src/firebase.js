@@ -48,9 +48,7 @@ export const getUserDocument = async (user) => {
   if (!user) return;
   try {
     const { uid } = user;
-    console.log('id of user in get user doc', uid);
     const userDoc = await firestore.doc(`users/${uid}`).get();
-    console.log('user doc data', userDoc.data());
     return {
       uid,
       ...userDoc.data(),
@@ -83,7 +81,6 @@ export const logout = async () => {
 
 //add picId to user document
 export const addPic = async (user, picId) => {
-  console.log('inside addpic');
   if (!user) return;
   const { uid } = user;
   try {
@@ -95,7 +92,6 @@ export const addPic = async (user, picId) => {
         },
         { merge: true }
       )
-      .then(() => console.log('merged'))
       .catch((error) => console.log(error));
   } catch (error) {
     console.log('error in adding pic to user doc', error);

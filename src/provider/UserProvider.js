@@ -6,7 +6,7 @@ class UserProvider extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { user: undefined };
+    this.state = { user: null };
   }
   componentDidMount = async () => {
     auth.onAuthStateChanged(async (userAuth) => {
@@ -16,6 +16,7 @@ class UserProvider extends Component {
   };
 
   render() {
+    console.log('user in provider', this.state.user);
     return (
       <UserContext.Provider value={{ user: this.state.user }}>
         {this.props.children}
