@@ -1,22 +1,24 @@
 import React from 'react';
 import { Button, Card, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function LikedImages(props) {
-  const { picArr } = props.user;
-  console.log('pic arr in liked', picArr);
+  const { photoArr } = props;
+  console.log('pic arr in liked', photoArr);
   return (
     <Container>
       <Container className="d-flex justify-content-center">
-        {picArr.map((pic) => (
-          <Card style={{ width: '18rem', margin: '15px' }}>
-            <Card.Img variant="top" src="holder.js/100px180" />
+        {photoArr.map((photo) => (
+          <Card key={photo.id} style={{ width: '18rem', margin: '15px' }}>
+            <Card.Img variant="top" src={photo.urls.full} height="300px" />
             <Card.Body>
-              <Card.Title>Card Title</Card.Title>
-              <Card.Text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </Card.Text>
-              <Button variant="primary">Go somewhere</Button>
+              <Card.Title>
+                Photo by <a href={photo.user.links.html}>{photo.user.name}</a>
+              </Card.Title>
+              <Card.Text>{photo.description}</Card.Text>
+              <a href={photo.links.html}>
+                <Button variant="primary">I'm here</Button>
+              </a>
             </Card.Body>
           </Card>
         ))}

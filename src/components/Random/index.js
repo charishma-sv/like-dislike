@@ -20,7 +20,6 @@ function Random(props) {
     getPics();
   }, []);
 
-  console.log('user from props in random', user);
   return (
     <Container fluid className="p-0 vh-100 text-center random-bg">
       <Tabs
