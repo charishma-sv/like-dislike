@@ -21,7 +21,7 @@ function Random(props) {
   }, []);
 
   return (
-    <Container fluid className="p-0 vh-100 text-center random-bg">
+    <Container fluid className="p-0 vh-100 text-center random">
       <Tabs
         varient="pills"
         activeKey={toggle}
@@ -35,11 +35,11 @@ function Random(props) {
           <LikedImages user={user} photoArr={photoArr} />
         </Tab>
       </Tabs>
-      <Container className="d-flex justify-content-center fixed-bottom">
+      <Container className="float-right fixed-top">
         <Button
+          className="logout-btn"
           variant="primary"
           type="submit"
-          className=""
           onClick={(event) => logout()}
         >
           Logout

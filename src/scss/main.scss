@@ -20,11 +20,13 @@ $random-bg-img: url('../images/photo-1533628635777-112b2239b1c7.jpeg');
     margin-top: 50px;
   }
 }
-.random-bg {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: $random-bg-img;
-  background-attachment: fixed;
+.random {
+  .random-bg {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: $random-bg-img;
+    background-attachment: scroll;
+  }
   .random-img {
     overflow: hidden;
     height: 60vh;
@@ -41,6 +43,11 @@ $random-bg-img: url('../images/photo-1533628635777-112b2239b1c7.jpeg');
     .nav-link {
       font-size: 25px;
     }
+  }
+  .logout-btn {
+    float: right;
+    top: 0;
+    right: 0;
   }
 }
 @import '~bootstrap/scss/bootstrap';
