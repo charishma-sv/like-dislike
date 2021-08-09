@@ -4,13 +4,12 @@ import pic from '../../images/patrick-tomasso-QMDap1TAu0g-unsplash.jpg';
 import dislike from '../../images/black-thumb-dislike-product.png';
 import like from '../../images/like-thumb-black-product.png';
 import { randomPic } from '../../unsplash';
-import { generateLikedDocument } from '../../firebase';
+import { addPic } from '../../firebase';
 function RandomImage(props) {
   const { user } = props;
   const [picture, setPicture] = React.useState(pic);
   const [likeCount, setLikeCount] = React.useState(0);
   const [picId, setPicId] = React.useState('');
-  const [likedId, setLikedId] = React.useState('');
 
   const getRandomPic = async () => {
     const { photo, id } = await randomPic();
@@ -26,7 +25,7 @@ function RandomImage(props) {
   const handleLike = () => {
     getRandomPic();
     setLikeCount(likeCount + 1);
-    generateLikedDocument(user, picId);
+    addPic(user, picId);
   };
 
   const handleDisLike = () => {

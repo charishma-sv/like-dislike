@@ -83,11 +83,11 @@ export const logout = async () => {
 
 //add picId to user document
 export const addPic = async (user, picId) => {
+  console.log('inside addpic');
   if (!user) return;
+  const { uid } = user;
   try {
     const userRef = firestore.doc(`users/${uid}`);
-
-    console.log('userData', userData);
     await userRef
       .set(
         {
@@ -95,7 +95,8 @@ export const addPic = async (user, picId) => {
         },
         { merge: true }
       )
-      .then(() => console.log('merged'));
+      .then(() => console.log('merged'))
+      .catch((error) => console.log(error));
   } catch (error) {
     console.log('error in adding pic to user doc', error);
     throw error;
