@@ -81,20 +81,41 @@ export const logout = async () => {
   }
 };
 
-//create liked picture ids document in firebase
-export const generateLikedDocument = async (user, picId) => {
-  if (!picId) return;
-  const likedRef = firestore.collection('liked').doc();
-  const imagesArr = [];
-  imagesArr.push(picId);
-  const liked = {
-    user,
-    likes: imagesArr,
-  };
+//add picId to user document
+export const addPic = async (user, picId) => {
+  if (!user) return;
   try {
-    await likedRef.set(liked);
+    const userRef = firestore.doc(`users/${uid}`);
+
+    console.log('userData', userData);
+    await userRef
+      .set(
+        {
+          picArr: firebase.firestore.FieldValue.arrayUnion(picId),
+        },
+        { merge: true }
+      )
+      .then(() => console.log('merged'));
   } catch (error) {
-    console.log('error generating liked doc', error);
+    console.log('error in adding pic to user doc', error);
     throw error;
   }
 };
+
+// //create liked picture ids document in firebase
+// export const generateLikedDocument = async (user, picId) => {
+//   if (!picId) return;
+//   const likedRef = firestore.collection('liked').doc();
+//   const imagesArr = [];
+//   imagesArr.push(picId);
+//   const liked = {
+//     user,
+//     likes: imagesArr,
+//   };
+//   try {
+//     await likedRef.set(liked);
+//   } catch (error) {
+//     console.log('error generating liked doc', error);
+//     throw error;
+//   }
+// };
