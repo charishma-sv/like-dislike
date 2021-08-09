@@ -13,6 +13,15 @@ export const randomPic = async () => {
   return { photo, id };
 };
 
-export const getPhotos = async (picArr) => {
+export const getPhotos = async (photoArr) => {
   console.log('inside get phots unsplash');
+  let pictures = [];
+  photoArr.map(
+    async (photo) =>
+      await unsplash.photos.get({ photoId: photo }).then((res) => {
+        pictures.push(res.response);
+      })
+  );
+  console.log('picture list from unsplash', pictures);
+  return pictures;
 };

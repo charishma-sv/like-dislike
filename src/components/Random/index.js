@@ -8,8 +8,16 @@ import { getPhotos } from '../../unsplash';
 function Random(props) {
   const [toggle, updateToggle] = React.useState('randomImage');
   const { user } = props;
+  const { picArr } = user;
+  const [photoArr, setPhotoArr] = React.useState([]);
+
+  const getPics = async () => {
+    const photos = await getPhotos(picArr);
+    setPhotoArr(photos);
+  };
+
   React.useEffect(() => {
-    getPhotos(user.picArr);
+    getPics();
   }, []);
 
   console.log('user from props in random', user);
@@ -25,7 +33,7 @@ function Random(props) {
           <RandomImage user={user} />
         </Tab>
         <Tab eventKey="liked" title="Profile">
-          <LikedImages user={user} />
+          <LikedImages user={user} photoArr={photoArr} />
         </Tab>
       </Tabs>
       <Container className="d-flex justify-content-center fixed-bottom">
