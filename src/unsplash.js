@@ -14,13 +14,18 @@ export const randomPic = async () => {
 };
 
 export const getPhotos = async (photoArr) => {
+  if (!photoArr) return;
   let pictures = [];
-  photoArr.map(
-    async (photo) =>
-      await unsplash.photos.get({ photoId: photo }).then((res) => {
-        pictures.push(res.response);
-      })
-  );
+  try {
+    photoArr.map(
+      async (photo) =>
+        await unsplash.photos.get({ photoId: photo }).then((res) => {
+          pictures.push(res.response);
+        })
+    );
+  } catch (error) {
+    console.log('error in get photos', error);
+  }
 
   return pictures;
 };
