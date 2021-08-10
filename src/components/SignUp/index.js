@@ -27,9 +27,9 @@ function SignUp() {
     }
   };
   return (
-    <Container className="mw-100 vh-100 d-flex align-items-center">
-      <Container className="w-50 h-75">
-        {error && <p>{`${error}`}</p>}
+    <Container className="mw-100 vh-100 mt-4">
+      <Container className="w-25 h-50 bg-dark d-flex flex-column justify-content-center">
+        {error && <p className="bg-warning text-center mb-4">{`${error}`}</p>}
         <Form className="">
           <Form.Group className="mb-3">
             <FloatingLabel
@@ -71,6 +71,7 @@ function SignUp() {
           </Form.Group>
 
           <Button
+            className="btn-block mt-4"
             variant="primary"
             type="submit"
             onClick={(event) => signUpUser(event, name, email, password)}

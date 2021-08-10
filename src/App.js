@@ -5,7 +5,7 @@ import './scss/main.scss';
 function App() {
   return (
     <UserProvider>
-      <Application></Application>
+      <Application />
     </UserProvider>
   );
 }

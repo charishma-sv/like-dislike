@@ -16,7 +16,7 @@ firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-//create a user
+//create a user using firebase authentication
 export const createUser = async (name, email, password) => {
   try {
     const { user } = await auth.createUserWithEmailAndPassword(email, password);
@@ -113,23 +113,7 @@ export const deleteField = async (user, id) => {
     console.log('error in deleting liked photo', error);
     throw error;
   }
-  console.log('deleted id', id);
-};
 
-// //create liked picture ids document in firebase
-// export const generateLikedDocument = async (user, picId) => {
-//   if (!picId) return;
-//   const likedRef = firestore.collection('liked').doc();
-//   const imagesArr = [];
-//   imagesArr.push(picId);
-//   const liked = {
-//     user,
-//     likes: imagesArr,
-//   };
-//   try {
-//     await likedRef.set(liked);
-//   } catch (error) {
-//     console.log('error generating liked doc', error);
-//     throw error;
-//   }
-// };
+  console.log('deleted id', id);
+  return await getUserDocument(user);
+};

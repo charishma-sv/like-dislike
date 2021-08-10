@@ -5,7 +5,6 @@ function LikedImages(props) {
   const { photoArr } = props;
   return (
     <Container>
-      {props.deleted && <p>Photo deleted</p>}
       <Container className="d-flex flex-wrap justify-content-center random-bg">
         {photoArr &&
           photoArr.map((photo) => (
