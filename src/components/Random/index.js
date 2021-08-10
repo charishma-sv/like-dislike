@@ -11,7 +11,7 @@ function Random(props) {
   const { user } = props;
   const { picArr } = user;
   const [photoArr, setPhotoArr] = React.useState([]);
-
+  const [deleted, setDeleted] = React.useState(false);
   const getPics = async (picArr) => {
     const photos = await getPhotos(picArr);
     setPhotoArr(photos);
@@ -42,7 +42,9 @@ function Random(props) {
   //delete a liked photo
   const deleteLiked = async (id) => {
     console.log('delete item id', id);
-    await deleteField(user, id);
+    await deleteField(user, id).then(() => {
+      setDeleted(true);
+    });
   };
   return (
     <Container fluid className="p-0 vh-100 text-center random">
@@ -67,6 +69,7 @@ function Random(props) {
             user={user}
             photoArr={photoArr}
             deleteLiked={deleteLiked}
+            deleted={deleted}
           />
         </Tab>
       </Tabs>

@@ -103,15 +103,17 @@ export const addPic = async (user, picId) => {
 //delete document field from user document
 export const deleteField = async (user, id) => {
   if (!user) return;
-  const { uid } = user;
-  const userRef = firestore.doc(`users/${uid}`);
-  userRef.update({
-    picArr: firebase.firestore.FieldValue.arrayRemove(id),
-  });
-
-  console.log('user in delete field', user);
-
-  console.log('id in delete field', id);
+  try {
+    const { uid } = user;
+    const userRef = firestore.doc(`users/${uid}`);
+    userRef.update({
+      picArr: firebase.firestore.FieldValue.arrayRemove(id),
+    });
+  } catch (error) {
+    console.log('error in deleting liked photo', error);
+    throw error;
+  }
+  console.log('deleted id', id);
 };
 
 // //create liked picture ids document in firebase
