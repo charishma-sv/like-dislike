@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Container, Tab, Tabs } from 'react-bootstrap';
-import { addPic, logout } from '../../firebase';
+import { addPic, deleteField, logout } from '../../firebase';
 import LikedImages from './LikedImages';
 import RandomImage from './RandomImage';
 import { getPhotos, randomPic } from '../../unsplash';
@@ -39,6 +39,11 @@ function Random(props) {
     setPicId(id);
   };
 
+  //delete a liked photo
+  const deleteLiked = async (id) => {
+    console.log('delete item id', id);
+    await deleteField(user, id);
+  };
   return (
     <Container fluid className="p-0 vh-100 text-center random">
       <Tabs
@@ -58,7 +63,11 @@ function Random(props) {
           />
         </Tab>
         <Tab eventKey="liked" title="Profile">
-          <LikedImages user={user} photoArr={photoArr} />
+          <LikedImages
+            user={user}
+            photoArr={photoArr}
+            deleteLiked={deleteLiked}
+          />
         </Tab>
       </Tabs>
       <Container className="float-right fixed-top">

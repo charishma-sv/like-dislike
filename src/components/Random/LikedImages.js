@@ -17,9 +17,16 @@ function LikedImages(props) {
                 <Card.Text style={{ height: '28px', overflow: 'hidden' }}>
                   {photo.description}
                 </Card.Text>
-                <a href={photo.links.html}>
+                <a href={photo.links.html} className="mr-4">
                   <Button variant="primary">Show</Button>
                 </a>
+
+                <Button
+                  variant="primary"
+                  onClick={() => props.deleteLiked(photo.id)}
+                >
+                  Delete
+                </Button>
               </Card.Body>
             </Card>
           ))}
