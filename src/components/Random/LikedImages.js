@@ -1,10 +1,8 @@
 import React from 'react';
 import { Button, Card, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 function LikedImages(props) {
   const { photoArr } = props;
-  console.log('photoArr', photoArr);
   return (
     <Container>
       <Container className="d-flex flex-wrap justify-content-center random-bg">

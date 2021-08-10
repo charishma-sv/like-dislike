@@ -93,6 +93,7 @@ export const addPic = async (user, picId) => {
         { merge: true }
       )
       .catch((error) => console.log(error));
+    return await getUserDocument(user);
   } catch (error) {
     console.log('error in adding pic to user doc', error);
     throw error;

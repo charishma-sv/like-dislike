@@ -1,52 +1,28 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import pic from '../../images/patrick-tomasso-QMDap1TAu0g-unsplash.jpg';
 import dislike from '../../images/black-thumb-dislike-product.png';
 import like from '../../images/like-thumb-black-product.png';
-import { randomPic } from '../../unsplash';
-import { addPic } from '../../firebase';
 function RandomImage(props) {
-  const { user } = props;
-  const [picture, setPicture] = React.useState(pic);
-  const [likeCount, setLikeCount] = React.useState(0);
-  const [picId, setPicId] = React.useState('');
-
-  const getRandomPic = async () => {
-    const { photo, id } = await randomPic();
-    setPicture(photo);
-    setPicId(id);
-  };
-
   React.useEffect(() => {
-    getRandomPic();
-  }, []);
-
-  const handleLike = () => {
-    getRandomPic();
-    setLikeCount(likeCount + 1);
-    addPic(user, picId);
-  };
-
-  const handleDisLike = () => {
-    getRandomPic();
-  };
+    props.getRandomPic(props.picArr);
+  }, [props]);
   return (
     <Container>
       <Container fluid className="random-img p-0">
-        <img src={picture} alt="" className="h-100" />
+        <img src={props.picture} alt="" className="h-100" />
       </Container>
       <Container className="mt-4">
         <img
           src={like}
           alt="like"
           className="btn random-btn"
-          onClick={() => handleLike()}
+          onClick={() => props.handleLike()}
         />
         <img
           src={dislike}
           alt="like"
           className=" btn random-btn"
-          onClick={() => handleDisLike()}
+          onClick={() => props.handleDisLike()}
         />
       </Container>
     </Container>
