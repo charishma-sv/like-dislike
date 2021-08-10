@@ -1,6 +1,6 @@
 import { createApi } from 'unsplash-js';
 const unsplash = createApi({
-  accessKey: 'mYj9awBmDjuLzvC_Xa--o75rGZdsvi1EIWIRB3mxHxo',
+  accessKey: process.env.REACT_APP_UNSPLASH_CLIENT_ID,
 });
 
 export const randomPic = async () => {
