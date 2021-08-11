@@ -20,12 +20,13 @@ function Random(props) {
   //get a random picture from unsplash
   const getRandomPic = async () => {
     const { photo, id, message } = await randomPic();
-
     if (message !== undefined) {
       setErr(true);
       setErrMessage('Sorry! Limit exceeded. Try after sometime');
       setPicture(noImage);
+      console.log('im in random pic if');
     } else {
+      console.log('im in random pic else');
       setPicture(photo);
       setPicId(id);
     }
@@ -62,6 +63,7 @@ function Random(props) {
   };
 
   React.useEffect(() => {
+    getRandomPic();
     getLinks(user);
   }, [user]);
 

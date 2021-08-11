@@ -23,8 +23,8 @@ function RandomImage(props) {
     }
   };
   React.useEffect(() => {
-    props.getRandomPic();
-  }, [props]);
+    // props.getRandomPic();
+  });
   return (
     <Container>
       <Container fluid className="random-img p-0">
