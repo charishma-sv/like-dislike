@@ -17,9 +17,9 @@ function LikedImages(props) {
                   <Button variant="primary">Show</Button>
                 </a>
 
-                {/* <Button variant="primary" onClick={() => props.deleteLiked()}>
+                <Button variant="primary" onClick={() => props.deleteLiked()}>
                   Delete
-                </Button> */}
+                </Button>
               </Card.Body>
             </Card>
           ))}

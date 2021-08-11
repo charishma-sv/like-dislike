@@ -111,9 +111,14 @@ export const deleteField = async (user, id) => {
   try {
     const { uid } = user;
     const userRef = firestore.doc(`users/${uid}`);
-    userRef.update({
-      picArr: firebase.firestore.FieldValue.arrayRemove(id),
-    });
+    userRef
+      .update({
+        picArr: firebase.firestore.FieldValue.arrayRemove(id),
+      })
+      .then(async () => {
+        await deletePhotoField(user, id);
+        console.log('deleted fiedl');
+      });
   } catch (error) {
     console.log('error in deleting liked photo', error);
     throw error;
@@ -153,5 +158,19 @@ export const getPhotoDocument = async (user) => {
     };
   } catch (error) {
     console.log('error in getting photo document', error);
+  }
+};
+
+//delete an photo entry in photo document
+export const deletePhotoField = async (user, picId) => {
+  if (!user) return;
+  const { uid } = user;
+  try {
+    const photoRef = firestore.doc(`photos/${uid}`);
+    await photoRef.update({
+      pics: firebase.firestore.FieldValue.arrayRemove({ picId }),
+    });
+  } catch (error) {
+    console.log('error in deleting photo id in photo document', error);
   }
 };

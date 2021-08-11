@@ -68,12 +68,13 @@ function Random(props) {
   const deleteLiked = async (id) => {
     const updatedUser = await deleteField(user, id);
     const { picArr } = updatedUser;
-    await getPics(picArr);
+    //await getPics(picArr);
+    await getLinks(updatedUser);
   };
 
   React.useEffect(() => {
-    getPics(picArr);
-  }, [picArr]);
+    getLinks(user);
+  }, [user]);
 
   return (
     <Container fluid className="p-0 vh-100 text-center random">
@@ -100,7 +101,7 @@ function Random(props) {
           <LikedImages
             user={user}
             photoArr={photoArr}
-            // deleteLiked={deleteLiked}
+            deleteLiked={deleteLiked}
             urlArr={urlArr}
           />
         </Tab>
