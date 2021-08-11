@@ -24,7 +24,6 @@ function Random(props) {
       setErr(true);
       setErrMessage('Sorry! Limit exceeded. Try after sometime');
     }
-    console.log('message', message);
   };
 
   //get all liked pics from unsplash
@@ -39,7 +38,6 @@ function Random(props) {
 
   const handleLike = async () => {
     getRandomPic();
-    console.log('pic Id', picId);
     if (picId) {
       const newUser = await addPic(user, picId);
       const { picArr } = newUser;
@@ -52,7 +50,6 @@ function Random(props) {
 
   //delete a liked photo
   const deleteLiked = async (id) => {
-    console.log('delete item id', id);
     const updatedUser = await deleteField(user, id);
     const { picArr } = updatedUser;
     await getPics(picArr);

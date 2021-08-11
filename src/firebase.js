@@ -113,7 +113,5 @@ export const deleteField = async (user, id) => {
     console.log('error in deleting liked photo', error);
     throw error;
   }
-
-  console.log('deleted id', id);
   return await getUserDocument(user);
 };
