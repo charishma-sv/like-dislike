@@ -115,3 +115,6 @@ export const deleteField = async (user, id) => {
   }
   return await getUserDocument(user);
 };
+
+//generate photolinks document
+export const picLinks = () => {};

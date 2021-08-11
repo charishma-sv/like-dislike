@@ -15,6 +15,7 @@ function Random(props) {
   const [picId, setPicId] = React.useState('');
   const [errMessage, setErrMessage] = React.useState('Loading! Please wait');
   const [err, setErr] = React.useState(false);
+
   //get a random picture from unsplash
   const getRandomPic = async () => {
     const { photo, id, message } = await randomPic();
