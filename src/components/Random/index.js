@@ -11,31 +11,40 @@ function Random(props) {
   const { user } = props;
   const { picArr } = user;
   const [photoArr, setPhotoArr] = React.useState([]);
+  const [picture, setPicture] = React.useState(pic);
+  const [picId, setPicId] = React.useState('');
+  const [errMessage, setErrMessage] = React.useState('Loading! Please wait');
+  const [err, setErr] = React.useState(false);
+  //get a random picture from unsplash
+  const getRandomPic = async () => {
+    const { photo, id, message } = await randomPic();
+    setPicture(photo);
+    setPicId(id);
+    if (message !== '') {
+      setErr(true);
+      setErrMessage('Sorry! Limit exceeded. Try after sometime');
+    }
+    console.log('message', message);
+  };
+
+  //get all liked pics from unsplash
   const getPics = async (picArr) => {
     const photos = await getPhotos(picArr);
     setPhotoArr(photos);
   };
 
-  React.useEffect(() => {
-    getPics(picArr);
-  }, [picArr]);
-  const [picture, setPicture] = React.useState(pic);
-  const [picId, setPicId] = React.useState('');
   const handleLike = async () => {
     getRandomPic();
-
-    const newUser = await addPic(user, picId);
-    const { picArr } = newUser;
-    const photos = await getPhotos(picArr);
-    setPhotoArr(photos);
+    console.log('pic Id', picId);
+    if (picId) {
+      const newUser = await addPic(user, picId);
+      const { picArr } = newUser;
+      const photos = await getPhotos(picArr);
+      setPhotoArr(photos);
+    }
   };
   const handleDisLike = () => {
     getRandomPic();
-  };
-  const getRandomPic = async () => {
-    const { photo, id } = await randomPic();
-    setPicture(photo);
-    setPicId(id);
   };
 
   //delete a liked photo
@@ -46,6 +55,11 @@ function Random(props) {
     const photos = await getPhotos(picArr);
     setPhotoArr(photos);
   };
+
+  React.useEffect(() => {
+    getPics(picArr);
+  }, [picArr]);
+
   return (
     <Container fluid className="p-0 vh-100 text-center random">
       <Tabs
@@ -62,6 +76,9 @@ function Random(props) {
             getRandomPic={getRandomPic}
             picture={picture}
             picArr={picArr}
+            picId={picId}
+            err={err}
+            errMessage={errMessage}
           />
         </Tab>
         <Tab eventKey="liked" title="Profile">

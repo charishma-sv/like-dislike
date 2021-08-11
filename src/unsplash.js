@@ -6,11 +6,18 @@ const unsplash = createApi({
 export const randomPic = async () => {
   let photo;
   let id;
-  await unsplash.photos.getRandom({}).then((res) => {
-    id = res.response.id;
-    photo = res.response.urls.regular;
-  });
-  return { photo, id };
+  let message;
+  await unsplash.photos
+    .getRandom({})
+    .then((res) => {
+      id = res.response.id;
+      photo = res.response.urls.regular;
+    })
+    .catch((error) => {
+      message = error.message;
+      console.log('error in getting random image', error);
+    });
+  return { photo, id, message };
 };
 
 export const getPhotos = async (photoArr) => {
@@ -19,9 +26,14 @@ export const getPhotos = async (photoArr) => {
   try {
     photoArr.map(
       async (photo) =>
-        await unsplash.photos.get({ photoId: photo }).then((res) => {
-          pictures.push(res.response);
-        })
+        await unsplash.photos
+          .get({ photoId: photo })
+          .then((res) => {
+            pictures.push(res.response);
+          })
+          .catch((error) =>
+            console.log('error in getting photos form unsplsh', error)
+          )
     );
   } catch (error) {
     console.log('error in get photos', error);

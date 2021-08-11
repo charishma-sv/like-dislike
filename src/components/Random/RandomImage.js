@@ -3,37 +3,53 @@ import { Container } from 'react-bootstrap';
 import dislike from '../../images/black-thumb-dislike-product.png';
 import like from '../../images/like-thumb-black-product.png';
 function RandomImage(props) {
+  const [message, setMessage] = React.useState('');
+  const liked = () => {
+    props.handleLike();
+    if (props.picId) {
+      setMessage('photo liked');
+      setTimeout(() => {
+        setMessage('');
+      }, 2000);
+    }
+  };
+  const disLiked = () => {
+    props.handleDisLike();
+    if (props.picId) {
+      setMessage('photo disliked');
+      setTimeout(() => {
+        setMessage('');
+      }, 2000);
+    }
+  };
   React.useEffect(() => {
     props.getRandomPic(props.picArr);
   }, [props]);
   return (
     <Container>
       <Container fluid className="random-img p-0">
+        {props.err && <h5>{props.errMessage}</h5>}
         <img src={props.picture} alt="" className="h-100" />
       </Container>
       <Container className="mt-4 ">
-        {/* <Container className="w-25 m-0"> */}
         <img
           src={like}
           alt="like"
           className="btn random-btn d-inline"
-          onClick={() => props.handleLike()}
+          onClick={() => liked()}
         />
-        {/* </Container> */}
         <span
           className="bg-dark"
           style={{ color: 'white', width: 'fit-content' }}
         >
-          photo liked
+          {message}
         </span>
-        {/* <Container className="w-25 m-0"> */}
         <img
           src={dislike}
           alt="like"
           className=" btn random-btn d-inline"
-          onClick={() => props.handleDisLike()}
+          onClick={() => disLiked()}
         />
-        {/* </Container> */}
       </Container>
     </Container>
   );
