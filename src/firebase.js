@@ -128,9 +128,13 @@ export const generatePhotoDocument = async (user, picId, url) => {
   console.log('pic id and url', picId, url);
   try {
     const photoRef = firestore.doc(`photos/${uid}`);
-    await photoRef.set({
-      pics: [{ picId, url }],
-    });
+    await photoRef.set(
+      {
+        pics: firebase.firestore.FieldValue.arrayUnion({ picId, url }),
+      },
+      { merge: true }
+    );
+    return await getPhotoDocument(user);
   } catch (error) {
     console.log('error in generating photo document', error);
   }
@@ -142,6 +146,7 @@ export const getPhotoDocument = async (user) => {
   const { uid } = user;
   try {
     const photoDoc = await firestore.doc(`photos/${uid}`).get();
+    console.log('photodoc dat', photoDoc.data());
     return {
       uid,
       ...photoDoc.data(),

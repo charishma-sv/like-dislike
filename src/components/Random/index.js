@@ -38,7 +38,11 @@ function Random(props) {
   };
 
   //get all liked pics form firestore
-  const getLinks = async (user, picArr) => {};
+  const getLinks = async (user) => {
+    const { pics } = await getPhotoDocument(user);
+    console.log('pics', pics);
+    pics.map((picData) => console.log('picData', picData));
+  };
 
   //handle likes
   const handleLike = async () => {
@@ -47,6 +51,7 @@ function Random(props) {
       const newUser = await addPic(user, picId);
       const { picArr } = newUser;
       await getPics(picArr);
+      await getLinks(user);
     }
   };
   const handleDisLike = () => {
