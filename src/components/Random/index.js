@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Container, Tab, Tabs } from 'react-bootstrap';
-import { addPic, deleteField, logout } from '../../firebase';
+import { addPic, deleteField, getPhotoDocument, logout } from '../../firebase';
 import LikedImages from './LikedImages';
 import RandomImage from './RandomImage';
 import { getPhotos, randomPic } from '../../unsplash';
@@ -37,6 +37,10 @@ function Random(props) {
     setPhotoArr(pictures);
   };
 
+  //get all liked pics form firestore
+  const getLinks = async (user, picArr) => {};
+
+  //handle likes
   const handleLike = async () => {
     getRandomPic();
     if (picId) {
