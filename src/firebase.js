@@ -98,7 +98,7 @@ export const addPic = async (user, picId) => {
         await generatePhotoDocument(user, picId, url);
       })
       .catch((error) => console.log(error));
-    return await getUserDocument(user);
+    return await getPhotoDocument(user);
   } catch (error) {
     console.log('error in adding pic to user doc', error);
     throw error;

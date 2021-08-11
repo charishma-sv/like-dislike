@@ -15,6 +15,7 @@ function Random(props) {
   const [picId, setPicId] = React.useState('');
   const [errMessage, setErrMessage] = React.useState('Loading! Please wait');
   const [err, setErr] = React.useState(false);
+  const [urlArr, setUrlArr] = React.useState([]);
 
   //get a random picture from unsplash
   const getRandomPic = async () => {
@@ -41,17 +42,22 @@ function Random(props) {
   const getLinks = async (user) => {
     const { pics } = await getPhotoDocument(user);
     console.log('pics', pics);
-    pics.map((picData) => console.log('picData', picData));
+    let photoUrls = [];
+    pics.map((picData) => photoUrls.push(picData.url));
+    console.log('photos urls', photoUrls);
+    setUrlArr(photoUrls);
   };
 
   //handle likes
   const handleLike = async () => {
     getRandomPic();
     if (picId) {
-      const newUser = await addPic(user, picId);
-      const { picArr } = newUser;
-      await getPics(picArr);
+      const { pics } = await addPic(user, picId);
       await getLinks(user);
+      // const {newUser} = await addPic(user, picId);
+      // const { picArr } = newUser;
+      // await getPics(picArr);
+      // await getLinks(user);
     }
   };
   const handleDisLike = () => {
@@ -94,7 +100,8 @@ function Random(props) {
           <LikedImages
             user={user}
             photoArr={photoArr}
-            deleteLiked={deleteLiked}
+            // deleteLiked={deleteLiked}
+            urlArr={urlArr}
           />
         </Tab>
       </Tabs>
