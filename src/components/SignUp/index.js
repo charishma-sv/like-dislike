@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import FloatingLabel from 'react-bootstrap-floating-label';
+import { Link } from 'react-router-dom';
 import { createUser } from '../../firebase';
 
 function SignUp() {
@@ -52,9 +53,6 @@ function SignUp() {
             >
               <Form.Control type="email" placeholder="name@example.com" />
             </FloatingLabel>
-            <Form.Text className="text-muted d-none">
-              Enter valid email
-            </Form.Text>
           </Form.Group>
 
           <Form.Group className="mb-3">
@@ -78,6 +76,14 @@ function SignUp() {
           >
             Signup
           </Button>
+          <Container className="mt-4 d-flex justify-content-center align-items-end">
+            <p className="m-0 mr-4" style={{ color: 'white' }}>
+              Already a member? Login here
+            </p>
+            <Link to="/login" style={{ color: 'white' }}>
+              <p className="m-0 ml-4">Login</p>
+            </Link>
+          </Container>
         </Form>
       </Container>
     </Container>

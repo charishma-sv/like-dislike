@@ -69,9 +69,7 @@ function Login() {
               New User? Create your account
             </p>
             <Link to="/signup" style={{ color: 'white' }}>
-              <p className="m-0 ml-4" style={{ color: 'white' }}>
-                Signup
-              </p>
+              <p className="m-0 ml-4">Signup</p>
             </Link>
           </Container>
         </Form>
