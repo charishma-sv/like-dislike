@@ -10,7 +10,7 @@ function RandomImage(props) {
       setMessage('photo liked');
       setTimeout(() => {
         setMessage('');
-      }, 2000);
+      }, 1000);
     }
   };
   const disLiked = () => {
@@ -19,7 +19,7 @@ function RandomImage(props) {
       setMessage('photo disliked');
       setTimeout(() => {
         setMessage('');
-      }, 2000);
+      }, 1000);
     }
   };
   React.useEffect(() => {

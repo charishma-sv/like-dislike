@@ -23,6 +23,7 @@ export const randomPic = async () => {
 export const getPhotos = async (photoArr) => {
   if (!photoArr) return;
   let pictures = [];
+  let message;
   try {
     photoArr.map(
       async (photo) =>
@@ -31,13 +32,14 @@ export const getPhotos = async (photoArr) => {
           .then((res) => {
             pictures.push(res.response);
           })
-          .catch((error) =>
-            console.log('error in getting photos form unsplsh', error)
-          )
+          .catch((error) => {
+            message = error.message;
+            console.log('error in getting photos form unsplsh', error);
+          })
     );
   } catch (error) {
     console.log('error in get photos', error);
   }
 
-  return pictures;
+  return { pictures, message };
 };

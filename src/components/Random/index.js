@@ -20,7 +20,7 @@ function Random(props) {
     const { photo, id, message } = await randomPic();
     setPicture(photo);
     setPicId(id);
-    if (message !== '') {
+    if (message !== undefined) {
       setErr(true);
       setErrMessage('Sorry! Limit exceeded. Try after sometime');
     }
@@ -29,8 +29,12 @@ function Random(props) {
 
   //get all liked pics from unsplash
   const getPics = async (picArr) => {
-    const photos = await getPhotos(picArr);
-    setPhotoArr(photos);
+    const { pictures, message } = await getPhotos(picArr);
+    if (message !== undefined) {
+      setErr(true);
+      setErrMessage('Sorry! Limit exceeded. Try after sometime');
+    }
+    setPhotoArr(pictures);
   };
 
   const handleLike = async () => {
@@ -39,8 +43,7 @@ function Random(props) {
     if (picId) {
       const newUser = await addPic(user, picId);
       const { picArr } = newUser;
-      const photos = await getPhotos(picArr);
-      setPhotoArr(photos);
+      await getPics(picArr);
     }
   };
   const handleDisLike = () => {
@@ -52,8 +55,7 @@ function Random(props) {
     console.log('delete item id', id);
     const updatedUser = await deleteField(user, id);
     const { picArr } = updatedUser;
-    const photos = await getPhotos(picArr);
-    setPhotoArr(photos);
+    await getPics(picArr);
   };
 
   React.useEffect(() => {
@@ -81,7 +83,7 @@ function Random(props) {
             errMessage={errMessage}
           />
         </Tab>
-        <Tab eventKey="liked" title="Profile">
+        <Tab eventKey="liked" title="Liked Photos">
           <LikedImages
             user={user}
             photoArr={photoArr}
