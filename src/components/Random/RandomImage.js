@@ -23,7 +23,7 @@ function RandomImage(props) {
     }
   };
   React.useEffect(() => {
-    props.getRandomPic(props.picArr);
+    props.getRandomPic();
   }, [props]);
   return (
     <Container>

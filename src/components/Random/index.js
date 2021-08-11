@@ -5,7 +5,7 @@ import LikedImages from './LikedImages';
 import RandomImage from './RandomImage';
 import { randomPic } from '../../unsplash';
 import pic from '../../images/patrick-tomasso-QMDap1TAu0g-unsplash.jpg';
-
+import noImage from '../../images/no-image.jpeg';
 function Random(props) {
   const [toggle, updateToggle] = React.useState('randomImage');
   const { user } = props;
@@ -16,24 +16,31 @@ function Random(props) {
   const [err, setErr] = React.useState(false);
   const [urlArr, setUrlArr] = React.useState([]);
   const [liked, setLiked] = React.useState([]);
+
   //get a random picture from unsplash
   const getRandomPic = async () => {
     const { photo, id, message } = await randomPic();
-    setPicture(photo);
-    setPicId(id);
+
     if (message !== undefined) {
       setErr(true);
       setErrMessage('Sorry! Limit exceeded. Try after sometime');
+      setPicture(noImage);
+    } else {
+      setPicture(photo);
+      setPicId(id);
     }
   };
 
   //get all liked pics form firestore
   const getLinks = async (user) => {
     const { pics } = await getPhotoDocument(user);
-    let photoUrls = [];
-    pics.map((picData) => photoUrls.push(picData.url));
-    setUrlArr(photoUrls);
-    setLiked(pics);
+    if (pics) {
+      console.log('pics in getlinks', pics);
+      let photoUrls = [];
+      pics.map((picData) => photoUrls.push(picData.url));
+      setUrlArr(photoUrls);
+      setLiked(pics);
+    }
   };
 
   //handle likes
@@ -50,8 +57,8 @@ function Random(props) {
 
   //delete a liked photo
   const deleteLiked = async (id) => {
-    const updatedUser = await deleteField(user, id);
-    await getLinks(updatedUser);
+    await deleteField(user, id);
+    await getLinks(user);
   };
 
   React.useEffect(() => {
@@ -85,6 +92,7 @@ function Random(props) {
             deleteLiked={deleteLiked}
             urlArr={urlArr}
             liked={liked}
+            noImage={noImage}
           />
         </Tab>
       </Tabs>
