@@ -11,19 +11,29 @@ function RandomImage(props) {
       <Container fluid className="random-img p-0">
         <img src={props.picture} alt="" className="h-100" />
       </Container>
-      <Container className="mt-4">
+      <Container className="mt-4 ">
+        {/* <Container className="w-25 m-0"> */}
         <img
           src={like}
           alt="like"
-          className="btn random-btn"
+          className="btn random-btn d-inline"
           onClick={() => props.handleLike()}
         />
+        {/* </Container> */}
+        <span
+          className="bg-dark"
+          style={{ color: 'white', width: 'fit-content' }}
+        >
+          photo liked
+        </span>
+        {/* <Container className="w-25 m-0"> */}
         <img
           src={dislike}
           alt="like"
-          className=" btn random-btn"
+          className=" btn random-btn d-inline"
           onClick={() => props.handleDisLike()}
         />
+        {/* </Container> */}
       </Container>
     </Container>
   );
