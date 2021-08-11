@@ -2,22 +2,25 @@ import React from 'react';
 import { Button, Card, Container } from 'react-bootstrap';
 
 function LikedImages(props) {
-  const { photoArr } = props;
-  const { urlArr } = props;
-  console.log('photoArr', urlArr);
+  //const { urlArr } = props;
+  const { liked } = props;
+  console.log('liked Arr', liked);
   return (
     <Container>
       <Container className="d-flex flex-wrap justify-content-center random-bg">
-        {urlArr &&
-          urlArr.map((url) => (
-            <Card key={url} style={{ width: '18rem', margin: '15px' }}>
-              <Card.Img variant="top" src={url} height="250px" />
+        {liked &&
+          liked.map((pic) => (
+            <Card key={pic.picId} style={{ width: '18rem', margin: '15px' }}>
+              <Card.Img variant="top" src={pic.url} height="250px" />
               <Card.Body>
-                <a href={url} className="mr-4">
+                <a href={pic.url} className="mr-4">
                   <Button variant="primary">Show</Button>
                 </a>
 
-                <Button variant="primary" onClick={() => props.deleteLiked()}>
+                <Button
+                  variant="primary"
+                  onClick={() => props.deleteLiked(pic.picId)}
+                >
                   Delete
                 </Button>
               </Card.Body>

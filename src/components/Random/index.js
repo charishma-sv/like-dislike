@@ -3,20 +3,19 @@ import { Button, Container, Tab, Tabs } from 'react-bootstrap';
 import { addPic, deleteField, getPhotoDocument, logout } from '../../firebase';
 import LikedImages from './LikedImages';
 import RandomImage from './RandomImage';
-import { getPhotos, randomPic } from '../../unsplash';
+import { randomPic } from '../../unsplash';
 import pic from '../../images/patrick-tomasso-QMDap1TAu0g-unsplash.jpg';
 
 function Random(props) {
   const [toggle, updateToggle] = React.useState('randomImage');
   const { user } = props;
   const { picArr } = user;
-  const [photoArr, setPhotoArr] = React.useState([]);
   const [picture, setPicture] = React.useState(pic);
   const [picId, setPicId] = React.useState('');
   const [errMessage, setErrMessage] = React.useState('Loading! Please wait');
   const [err, setErr] = React.useState(false);
   const [urlArr, setUrlArr] = React.useState([]);
-
+  const [liked, setLiked] = React.useState([]);
   //get a random picture from unsplash
   const getRandomPic = async () => {
     const { photo, id, message } = await randomPic();
@@ -28,36 +27,21 @@ function Random(props) {
     }
   };
 
-  //get all liked pics from unsplash
-  const getPics = async (picArr) => {
-    const { pictures, message } = await getPhotos(picArr);
-    if (message !== undefined) {
-      setErr(true);
-      setErrMessage('Sorry! Limit exceeded. Try after sometime');
-    }
-    setPhotoArr(pictures);
-  };
-
   //get all liked pics form firestore
   const getLinks = async (user) => {
     const { pics } = await getPhotoDocument(user);
-    console.log('pics', pics);
     let photoUrls = [];
     pics.map((picData) => photoUrls.push(picData.url));
-    console.log('photos urls', photoUrls);
     setUrlArr(photoUrls);
+    setLiked(pics);
   };
 
   //handle likes
   const handleLike = async () => {
     getRandomPic();
     if (picId) {
-      const { pics } = await addPic(user, picId);
+      await addPic(user, picId);
       await getLinks(user);
-      // const {newUser} = await addPic(user, picId);
-      // const { picArr } = newUser;
-      // await getPics(picArr);
-      // await getLinks(user);
     }
   };
   const handleDisLike = () => {
@@ -67,8 +51,6 @@ function Random(props) {
   //delete a liked photo
   const deleteLiked = async (id) => {
     const updatedUser = await deleteField(user, id);
-    const { picArr } = updatedUser;
-    //await getPics(picArr);
     await getLinks(updatedUser);
   };
 
@@ -100,9 +82,9 @@ function Random(props) {
         <Tab eventKey="liked" title="Liked Photos">
           <LikedImages
             user={user}
-            photoArr={photoArr}
             deleteLiked={deleteLiked}
             urlArr={urlArr}
+            liked={liked}
           />
         </Tab>
       </Tabs>

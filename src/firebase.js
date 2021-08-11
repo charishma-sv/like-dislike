@@ -130,7 +130,6 @@ export const deleteField = async (user, id) => {
 export const generatePhotoDocument = async (user, picId, url) => {
   if (!user) return;
   const { uid } = user;
-  console.log('pic id and url', picId, url);
   try {
     const photoRef = firestore.doc(`photos/${uid}`);
     await photoRef.set(
@@ -151,7 +150,6 @@ export const getPhotoDocument = async (user) => {
   const { uid } = user;
   try {
     const photoDoc = await firestore.doc(`photos/${uid}`).get();
-    console.log('photodoc dat', photoDoc.data());
     return {
       uid,
       ...photoDoc.data(),
@@ -167,10 +165,27 @@ export const deletePhotoField = async (user, picId) => {
   const { uid } = user;
   try {
     const photoRef = firestore.doc(`photos/${uid}`);
+    const pics = (await photoRef.get()).data();
+    console.log('pics', pics);
+    const exclude = { picId: picId };
+
+    // console.log(
+    //   'exclude picid',
+    //   pics.filter((pic) => pic.picId !== picId)
+    // );
     await photoRef.update({
-      pics: firebase.firestore.FieldValue.arrayRemove({ picId }),
+      //pics: pics.filter((pic) => pic.picId !== picId),
+      pics: filter(pics, exclude),
     });
   } catch (error) {
     console.log('error in deleting photo id in photo document', error);
   }
+};
+
+const filter = (arr, criteria) => {
+  return arr.filter(function (obj) {
+    return Object.keys(criteria).every(function (c) {
+      return obj[c] !== criteria[c];
+    });
+  });
 };
