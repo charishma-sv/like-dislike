@@ -1,6 +1,6 @@
 import { createApi } from 'unsplash-js';
 const unsplash = createApi({
-  accessKey: process.env.REACT_APP_UNSPLASH_CLIENT_ID,
+  accessKey: 'mYj9awBmDjuLzvC_Xa--o75rGZdsvi1EIWIRB3mxHxo',
 });
 
 export const randomPic = async () => {
@@ -42,4 +42,13 @@ export const getPhotos = async (photoArr) => {
   }
 
   return { pictures, message };
+};
+
+export const getPhotoURL = async (id) => {
+  if (!id) return;
+  let url;
+  await unsplash.photos.get({ photoId: id }).then((result) => {
+    url = result.response.urls.full;
+  });
+  return url;
 };

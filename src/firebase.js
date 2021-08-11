@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import { getPhotoURL } from './unsplash';
 //Firebase configuration
 var firebaseConfig = {
   apiKey: 'AIzaSyDUXQ5JFGL01ZATDjDvOBdRmuPYzXIQf_w',
@@ -92,6 +93,9 @@ export const addPic = async (user, picId) => {
         },
         { merge: true }
       )
+      .then(() => {
+        const url = getPhotoURL(picId);
+      })
       .catch((error) => console.log(error));
     return await getUserDocument(user);
   } catch (error) {
@@ -117,4 +121,7 @@ export const deleteField = async (user, id) => {
 };
 
 //generate photolinks document
-export const picLinks = () => {};
+export const picLinks = (user) => {
+  if (!user) return;
+  const { picArr } = user;
+};
