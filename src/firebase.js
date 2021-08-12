@@ -94,9 +94,9 @@ export const addPic = async (user, picId) => {
         { merge: true }
       )
       .then(async () => {
-        const url = await getPhoto(picId);
-        console.log('url', url);
-        await generatePhotoDocument(user, picId, url);
+        const picData = await getPhoto(picId);
+        //console.log('url', url);
+        await generatePhotoDocument(user, picId, picData);
       })
       .catch((error) => console.log(error));
     return await getPhotoDocument(user);
@@ -127,14 +127,17 @@ export const deleteField = async (user, id) => {
 };
 
 //generate photolinks document
-export const generatePhotoDocument = async (user, picId, url) => {
+export const generatePhotoDocument = async (user, picId, picData) => {
   if (!user) return;
   const { uid } = user;
   try {
     const photoRef = firestore.doc(`photos/${uid}`);
+    console.log('pic data in generate photo', picData);
+    //const { url, html, name, userHtml, description} = picData;
+
     await photoRef.set(
       {
-        pics: firebase.firestore.FieldValue.arrayUnion({ picId, url }),
+        pics: firebase.firestore.FieldValue.arrayUnion({ picId, ...picData }),
       },
       { merge: true }
     );

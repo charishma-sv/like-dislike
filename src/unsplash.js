@@ -26,17 +26,33 @@ export const getRandom = async () => {
 export const getPhoto = async (id) => {
   if (!id) return;
   let url;
+  let name;
+  let html;
+  let description;
+  let userHtml;
   await axios
     .get(
       `https://api.unsplash.com/photos/${id}?client_id=${process.env.REACT_APP_UNSPLASH_CLIENT_ID}`
     )
     .then((res) => {
       url = res.data.urls.full;
+      name = res.data.user.name;
+      html = res.data.links.html;
+      userHtml = res.data.user.links.html;
+      description = res.data.description;
+      console.log(
+        'ur,name,html,userhtml,description',
+        url,
+        name,
+        html,
+        userHtml,
+        description
+      );
     })
     .catch((error) => {
       console.log('error in getting random image', error);
     });
-  return url;
+  return { url, html, name, userHtml, description };
 };
 
 const unsplash = createApi({
