@@ -32,7 +32,6 @@ export const getPhoto = async (id) => {
     )
     .then((res) => {
       url = res.data.urls.full;
-      console.log('url', url);
     })
     .catch((error) => {
       console.log('error in getting random image', error);

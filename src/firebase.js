@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-import { getPhotoURL } from './unsplash';
+import { getPhoto, getPhotoURL } from './unsplash';
 //Firebase configuration
 var firebaseConfig = {
   apiKey: 'AIzaSyDUXQ5JFGL01ZATDjDvOBdRmuPYzXIQf_w',
@@ -94,7 +94,8 @@ export const addPic = async (user, picId) => {
         { merge: true }
       )
       .then(async () => {
-        const url = await getPhotoURL(picId);
+        const url = await getPhoto(picId);
+        console.log('url', url);
         await generatePhotoDocument(user, picId, url);
       })
       .catch((error) => console.log(error));
