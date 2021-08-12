@@ -3,15 +3,14 @@ import { Button, Card, Container } from 'react-bootstrap';
 
 function LikedImages(props) {
   const { liked } = props;
-
+  console.log('liked', liked);
   return (
     <Container>
       <Container className="d-flex flex-wrap justify-content-center random-bg">
-        {liked === undefined ? (
-          <Container className="h-50">
-            <img height="300px" alt="unavailable" src={props.noImage} />
-          </Container>
-        ) : (
+        {typeof liked != 'undefined' &&
+        liked != null &&
+        liked.length != null &&
+        liked.length > 0 ? (
           liked.map((photo) => (
             <Card key={photo.id} style={{ width: '18rem', margin: '15px' }}>
               <Card.Img variant="top" src={photo.url} height="250px" />
@@ -35,6 +34,10 @@ function LikedImages(props) {
               </Card.Body>
             </Card>
           ))
+        ) : (
+          <Container className="h-50">
+            <img height="300px" alt="unavailable" src={props.noImage} />
+          </Container>
         )}
       </Container>
     </Container>
