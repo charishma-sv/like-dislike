@@ -31,6 +31,12 @@ function RandomImage(props) {
         {props.err && <h5>{props.errMessage}</h5>}
         <img src={props.picture} alt="" className="h-100" />
       </Container>
+      <Container>
+        <h5>
+          Photo by:
+          <a href={props.randomPicData.html}>{props.randomPicData.name}</a>
+        </h5>
+      </Container>
       <Container className="mt-4 ">
         <img
           src={like}

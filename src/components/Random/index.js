@@ -16,7 +16,7 @@ function Random(props) {
   const [err, setErr] = React.useState(false);
   const [urlArr, setUrlArr] = React.useState([]);
   const [liked, setLiked] = React.useState([]);
-
+  const [randomPicData, setRandomPicData] = React.useState({});
   //get a random picture from unsplash
   const getRandomPic = async () => {
     const { photo, id, message } = await getRandom();
@@ -27,7 +27,8 @@ function Random(props) {
     } else {
       setPicture(photo);
       setPicId(id);
-      await getPhoto(id);
+      const picData = await getPhoto(id);
+      setRandomPicData(picData);
     }
   };
 
@@ -61,7 +62,6 @@ function Random(props) {
   };
 
   React.useEffect(() => {
-    getRandom();
     getRandomPic();
     getLinks(user);
   }, [user]);
@@ -85,6 +85,7 @@ function Random(props) {
             picId={picId}
             err={err}
             errMessage={errMessage}
+            randomPicData={randomPicData}
           />
         </Tab>
         <Tab eventKey="liked" title="Liked Photos">
