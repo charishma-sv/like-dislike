@@ -24,9 +24,7 @@ function Random(props) {
       setErr(true);
       setErrMessage('Sorry! Limit exceeded. Try after sometime');
       setPicture(noImage);
-      console.log('im in random pic if');
     } else {
-      console.log('im in random pic else');
       setPicture(photo);
       setPicId(id);
     }
@@ -36,7 +34,6 @@ function Random(props) {
   const getLinks = async (user) => {
     const { pics } = await getPhotoDocument(user);
     if (pics) {
-      console.log('pics in getlinks', pics);
       let photoUrls = [];
       pics.map((picData) => photoUrls.push(picData.url));
       setUrlArr(photoUrls);

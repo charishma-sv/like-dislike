@@ -117,13 +117,11 @@ export const deleteField = async (user, id) => {
       })
       .then(async () => {
         await deletePhotoField(user, id);
-        console.log('deleted fiedl');
       });
   } catch (error) {
     console.log('error in deleting liked photo', error);
     throw error;
   }
-  console.log('user after deleting in firebase', user);
   return await getUserDocument(user);
 };
 
@@ -167,33 +165,10 @@ export const deletePhotoField = async (user, picId) => {
   try {
     const photoRef = firestore.doc(`photos/${uid}`);
     const { pics } = (await photoRef.get()).data();
-    console.log('pics', pics.pics);
-    // const exclude = { picId: picId };
-    // const arr = [
-    //   { a: 1, b: 2 },
-    //   { a: 4, b: 5 },
-    // ];
-    //let excludeItem = arr.find((item) => item.a > 3);
-    //console.log('exxlude item', excludeItem);
-    // console.log(
-    //   'exclude picid',
-    //   pics.filter((pic) => pic.picId !== picId)
-    // );
     await photoRef.update({
       pics: pics.filter((pic) => pic.picId !== picId),
-      //   pics: pics.filter(function (pic) {
-      //     return pic.picId !== picId;
-      //   }),
     });
   } catch (error) {
     console.log('error in deleting photo id in photo document', error);
   }
-};
-
-const filter = (arr, criteria) => {
-  return arr.filter(function (obj) {
-    return Object.keys(criteria).every(function (c) {
-      return obj[c] !== criteria[c];
-    });
-  });
 };
