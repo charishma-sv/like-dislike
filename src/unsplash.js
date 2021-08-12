@@ -1,6 +1,29 @@
 import { createApi } from 'unsplash-js';
+import axios from 'axios';
+
+//http request to get random pic from unsplash
+export const getRandom = async () => {
+  let photo;
+  let id;
+  let message;
+  await axios
+    .get(
+      `https://api.unsplash.com/photos/random/?client_id=${process.env.REACT_APP_UNSPLASH_CLIENT_ID}`
+    )
+    .then((res) => {
+      console.log('res', res);
+      id = res.data.id;
+      photo = res.data.urls.full;
+    })
+    .catch((error) => {
+      message = error.message;
+      console.log('error in getting random image', error);
+    });
+  return { photo, id, message };
+};
+
 const unsplash = createApi({
-  accessKey: 'mYj9awBmDjuLzvC_Xa--o75rGZdsvi1EIWIRB3mxHxo',
+  accessKey: process.env.REACT_APP_UNSPLASH_CLIENT_ID,
 });
 
 export const randomPic = async () => {

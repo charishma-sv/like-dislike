@@ -3,7 +3,7 @@ import { Button, Container, Tab, Tabs } from 'react-bootstrap';
 import { addPic, deleteField, getPhotoDocument, logout } from '../../firebase';
 import LikedImages from './LikedImages';
 import RandomImage from './RandomImage';
-import { randomPic } from '../../unsplash';
+import { getRandom, randomPic } from '../../unsplash';
 import pic from '../../images/patrick-tomasso-QMDap1TAu0g-unsplash.jpg';
 import noImage from '../../images/no-image.jpeg';
 function Random(props) {
@@ -60,6 +60,7 @@ function Random(props) {
   };
 
   React.useEffect(() => {
+    getRandom();
     getRandomPic();
     getLinks(user);
   }, [user]);
