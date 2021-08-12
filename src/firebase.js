@@ -95,10 +95,9 @@ export const addPic = async (user, picId) => {
       )
       .then(async () => {
         const picData = await getPhoto(picId);
-        //console.log('url', url);
         await generatePhotoDocument(user, picId, picData);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log('error in adding liked pic', error));
     return await getPhotoDocument(user);
   } catch (error) {
     console.log('error in adding pic to user doc', error);
@@ -132,9 +131,6 @@ export const generatePhotoDocument = async (user, picId, picData) => {
   const { uid } = user;
   try {
     const photoRef = firestore.doc(`photos/${uid}`);
-    console.log('pic data in generate photo', picData);
-    //const { url, html, name, userHtml, description} = picData;
-
     await photoRef.set(
       {
         pics: firebase.firestore.FieldValue.arrayUnion({ picId, ...picData }),

@@ -8,10 +8,9 @@ export const getRandom = async () => {
   let message;
   await axios
     .get(
-      `https://api.unsplash.com/photos/random/?client_id=mYj9awBmDjuLzvC_Xa--o75rGZdsvi1EIWIRB3mxHxo`
+      `https://api.unsplash.com/photos/random/?client_id=${process.env.REACT_APP_UNSPLASH_CLIENT_ID}`
     )
     .then((res) => {
-      console.log('res', res);
       id = res.data.id;
       photo = res.data.urls.full;
     })
@@ -32,7 +31,7 @@ export const getPhoto = async (id) => {
   let userHtml;
   await axios
     .get(
-      `https://api.unsplash.com/photos/${id}?client_id=mYj9awBmDjuLzvC_Xa--o75rGZdsvi1EIWIRB3mxHxo`
+      `https://api.unsplash.com/photos/${id}?client_id=${process.env.REACT_APP_UNSPLASH_CLIENT_ID}`
     )
     .then((res) => {
       url = res.data.urls.full;
@@ -40,14 +39,6 @@ export const getPhoto = async (id) => {
       html = res.data.links.html;
       userHtml = res.data.user.links.html;
       description = res.data.description;
-      console.log(
-        'ur,name,html,userhtml,description',
-        url,
-        name,
-        html,
-        userHtml,
-        description
-      );
     })
     .catch((error) => {
       console.log('error in getting random image', error);
@@ -59,6 +50,7 @@ const unsplash = createApi({
   accessKey: process.env.REACT_APP_UNSPLASH_CLIENT_ID,
 });
 
+//getting random pic using unsplash npm package methods
 export const randomPic = async () => {
   let photo;
   let id;
@@ -76,6 +68,7 @@ export const randomPic = async () => {
   return { photo, id, message };
 };
 
+//getting all photos by pic array from unsplash
 export const getPhotos = async (photoArr) => {
   if (!photoArr) return;
   let pictures = [];
@@ -100,6 +93,7 @@ export const getPhotos = async (photoArr) => {
   return { pictures, message };
 };
 
+//getting the url of photo by id
 export const getPhotoURL = async (id) => {
   if (!id) return;
   let url;

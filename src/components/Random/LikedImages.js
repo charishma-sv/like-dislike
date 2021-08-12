@@ -3,7 +3,7 @@ import { Button, Card, Container } from 'react-bootstrap';
 
 function LikedImages(props) {
   const { liked } = props;
-  console.log('liked', liked.length);
+
   return (
     <Container>
       <Container className="d-flex flex-wrap justify-content-center random-bg">

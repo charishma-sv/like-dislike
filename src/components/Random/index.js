@@ -16,6 +16,7 @@ function Random(props) {
   const [err, setErr] = React.useState(false);
   const [liked, setLiked] = React.useState([]);
   const [randomPicData, setRandomPicData] = React.useState({});
+
   //get a random picture from unsplash
   const getRandomPic = async () => {
     const { photo, id, message } = await getRandom();
@@ -34,10 +35,7 @@ function Random(props) {
   //get all liked pics form firestore
   const getLinks = async (user) => {
     const { pics } = await getPhotoDocument(user);
-    //if (pics) {
     setLiked(pics);
-    console.log('pics', pics);
-    //}
   };
 
   //handle likes
@@ -87,15 +85,13 @@ function Random(props) {
         </Tab>
         <Tab eventKey="liked" title="Liked Photos">
           <LikedImages
-            //user={user}
             deleteLiked={deleteLiked}
-            //urlArr={urlArr}
             liked={liked}
             noImage={noImage}
           />
         </Tab>
       </Tabs>
-      <Container className="float-right fixed-top">
+      <Container className="float-right fixed-top mb-4">
         <Container className="d-flex w-100 justify-content-space-between">
           <h5 class="w-100" style={{ color: '#2c6975' }}>
             I'm <span>{user.name}</span>
