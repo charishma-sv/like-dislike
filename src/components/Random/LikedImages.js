@@ -3,28 +3,15 @@ import { Button, Card, Container } from 'react-bootstrap';
 
 function LikedImages(props) {
   const { liked } = props;
+  console.log('liked', liked.length);
   return (
     <Container>
       <Container className="d-flex flex-wrap justify-content-center random-bg">
-        {/* {liked &&
-          liked.map((pic) => (
-            <Card key={pic.picId} style={{ width: '18rem', margin: '15px' }}>
-              <Card.Img variant="top" src={pic.url} height="250px" />
-              <Card.Body>
-                <a href={pic.url} className="mr-4">
-                  <Button variant="primary">Show</Button>
-                </a>
-
-                <Button
-                  variant="primary"
-                  onClick={() => props.deleteLiked(pic.picId)}
-                >
-                  Delete
-                </Button>
-              </Card.Body>
-            </Card>
-          ))} */}
-        {liked &&
+        {liked.length === 0 ? (
+          <Container className="h-50">
+            <img height="300px" alt="unavailable" src={props.noImage} />
+          </Container>
+        ) : (
           liked.map((photo) => (
             <Card key={photo.id} style={{ width: '18rem', margin: '15px' }}>
               <Card.Img variant="top" src={photo.url} height="250px" />
@@ -47,7 +34,8 @@ function LikedImages(props) {
                 </Button>
               </Card.Body>
             </Card>
-          ))}
+          ))
+        )}
       </Container>
     </Container>
   );

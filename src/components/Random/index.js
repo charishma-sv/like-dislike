@@ -34,10 +34,10 @@ function Random(props) {
   //get all liked pics form firestore
   const getLinks = async (user) => {
     const { pics } = await getPhotoDocument(user);
-    if (pics) {
-      setLiked(pics);
-      console.log('pics', pics);
-    }
+    //if (pics) {
+    setLiked(pics);
+    console.log('pics', pics);
+    //}
   };
 
   //handle likes
