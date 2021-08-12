@@ -62,7 +62,7 @@ function Random(props) {
   }, [user]);
 
   return (
-    <Container fluid className="p-0 mt-4 vh-100 text-center random">
+    <Container fluid className="p-0 vh-100 text-center random">
       <Tabs
         varient="pills"
         activeKey={toggle}
@@ -92,9 +92,9 @@ function Random(props) {
         </Tab>
       </Tabs>
       <Container className="float-right fixed-top mb-4">
-        <Container className="d-flex w-100 justify-content-space-between">
-          <h5 class="w-100" style={{ color: '#2c6975' }}>
-            I'm <span>{user.name}</span>
+        <Container className="d-flex w-100 justify-content-between mr-0">
+          <h5 className="m-0" style={{ color: '#2c6975', fontSize: '30px' }}>
+            I'm <span className="mb-4">{user.name}</span>
           </h5>
           <Button
             className="logout-btn"
