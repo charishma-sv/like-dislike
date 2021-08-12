@@ -6,7 +6,7 @@ function LikedImages(props) {
   return (
     <Container>
       <Container className="d-flex flex-wrap justify-content-center random-bg">
-        {liked &&
+        {/* {liked &&
           liked.map((pic) => (
             <Card key={pic.picId} style={{ width: '18rem', margin: '15px' }}>
               <Card.Img variant="top" src={pic.url} height="250px" />
@@ -23,31 +23,31 @@ function LikedImages(props) {
                 </Button>
               </Card.Body>
             </Card>
-          ))}
-        {/* {photoArr &&
-          photoArr.map((photo) => (
+          ))} */}
+        {liked &&
+          liked.map((photo) => (
             <Card key={photo.id} style={{ width: '18rem', margin: '15px' }}>
-              <Card.Img variant="top" src={photo.urls.full} height="250px" />
+              <Card.Img variant="top" src={photo.url} height="250px" />
               <Card.Body>
                 <Card.Title>
-                  Photo by <a href={photo.user.links.html}>{photo.user.name}</a>
+                  Photo by <a href={photo.html}>{photo.name}</a>
                 </Card.Title>
                 <Card.Text style={{ height: '28px', overflow: 'hidden' }}>
                   {photo.description}
                 </Card.Text>
-                <a href={photo.links.html} className="mr-4">
+                <a href={photo.html} className="mr-4">
                   <Button variant="primary">Show</Button>
                 </a>
 
                 <Button
                   variant="primary"
-                  onClick={() => props.deleteLiked(photo.id)}
+                  onClick={() => props.deleteLiked(photo.picId)}
                 >
                   Delete
                 </Button>
               </Card.Body>
             </Card>
-          ))} */}
+          ))}
       </Container>
     </Container>
   );

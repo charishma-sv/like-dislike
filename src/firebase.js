@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-import { getPhoto, getPhotoURL } from './unsplash';
+import { getPhoto } from './unsplash';
 //Firebase configuration
 var firebaseConfig = {
   apiKey: 'AIzaSyDUXQ5JFGL01ZATDjDvOBdRmuPYzXIQf_w',

@@ -8,7 +8,7 @@ export const getRandom = async () => {
   let message;
   await axios
     .get(
-      `https://api.unsplash.com/photos/random/?client_id=${process.env.REACT_APP_UNSPLASH_CLIENT_ID}`
+      `https://api.unsplash.com/photos/random/?client_id=mYj9awBmDjuLzvC_Xa--o75rGZdsvi1EIWIRB3mxHxo`
     )
     .then((res) => {
       console.log('res', res);
@@ -32,7 +32,7 @@ export const getPhoto = async (id) => {
   let userHtml;
   await axios
     .get(
-      `https://api.unsplash.com/photos/${id}?client_id=${process.env.REACT_APP_UNSPLASH_CLIENT_ID}`
+      `https://api.unsplash.com/photos/${id}?client_id=mYj9awBmDjuLzvC_Xa--o75rGZdsvi1EIWIRB3mxHxo`
     )
     .then((res) => {
       url = res.data.urls.full;
