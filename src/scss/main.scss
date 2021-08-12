@@ -31,6 +31,7 @@ $random-bg-img: url('../images/photo-1533628635777-112b2239b1c7.jpeg');
     overflow: hidden;
     height: 60vh;
     img {
+      width: 100%;
       @include border-list;
     }
   }

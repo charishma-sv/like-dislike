@@ -65,7 +65,7 @@ function Random(props) {
   }, [user]);
 
   return (
-    <Container fluid className="p-0 vh-100 text-center random">
+    <Container fluid className="p-0 mt-4 vh-100 text-center random">
       <Tabs
         varient="pills"
         activeKey={toggle}
