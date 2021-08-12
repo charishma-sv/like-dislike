@@ -7,7 +7,7 @@ function LikedImages(props) {
   return (
     <Container>
       <Container className="d-flex flex-wrap justify-content-center random-bg">
-        {liked.length === 0 ? (
+        {liked === undefined ? (
           <Container className="h-50">
             <img height="300px" alt="unavailable" src={props.noImage} />
           </Container>
