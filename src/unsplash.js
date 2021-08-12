@@ -22,6 +22,24 @@ export const getRandom = async () => {
   return { photo, id, message };
 };
 
+//get photo by id using http req
+export const getPhoto = async (id) => {
+  if (!id) return;
+  let url;
+  await axios
+    .get(
+      `https://api.unsplash.com/photos/${id}?client_id=${process.env.REACT_APP_UNSPLASH_CLIENT_ID}`
+    )
+    .then((res) => {
+      url = res.data.urls.full;
+      console.log('url', url);
+    })
+    .catch((error) => {
+      console.log('error in getting random image', error);
+    });
+  return url;
+};
+
 const unsplash = createApi({
   accessKey: process.env.REACT_APP_UNSPLASH_CLIENT_ID,
 });
