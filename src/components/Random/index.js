@@ -96,14 +96,19 @@ function Random(props) {
         </Tab>
       </Tabs>
       <Container className="float-right fixed-top">
-        <Button
-          className="logout-btn"
-          variant="primary"
-          type="submit"
-          onClick={(event) => logout()}
-        >
-          Logout
-        </Button>
+        <Container className="d-flex w-100 justify-content-space-between">
+          <h5 class="w-100" style={{ color: '#2c6975' }}>
+            I'm <span>{user.name}</span>
+          </h5>
+          <Button
+            className="logout-btn"
+            variant="primary"
+            type="submit"
+            onClick={(event) => logout()}
+          >
+            Logout
+          </Button>
+        </Container>
       </Container>
     </Container>
   );
